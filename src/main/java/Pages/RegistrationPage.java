@@ -2,7 +2,7 @@ package Pages;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
 public class RegistrationPage extends CommonPage {
     WebDriver driver;
@@ -11,71 +11,56 @@ public class RegistrationPage extends CommonPage {
         this.driver = driver;
     }
 
-    By createAccBTn = By.linkText("Create New Account");
-    By firstNameInput = By.xpath("//*[@name=\"firstname\"]");
-    By lastNameInput = By.name("lastname");
-    By emaiOrMobilelInput = By.name("reg_email__");
-    By passwordInput = By.name("reg_passwd__");
-    By birthDayInput = By.name("birthday_day");
-    By birthMonthInput = By.name("birthday_month");
-    By birthYearInput = By.name("birthday_year");
-    By fameleSelector = By.xpath("//*[@name=\"sex\"][1]");
-    By signUpIconIfDisplayed = By.xpath("//*[@id=\"facebook\"]/body/div[3]/div[2]/div/div/div[1]/div[1]");
-    By getSignUpBtn = By.name("websubmit");
+    By registrationBtn = By.className("ty-login-reglink__a");
+    By physicalPersonSlc = By.xpath("//*[@id=\"user_type\"]/input[1]");
+    By emailInput = By.name("user_data[email]");
+    By passwordInput = By.name("user_data[password1]");
+    By confirmPassInput = By.name("user_data[password2]");
+    By firstnameInput = By.name("user_data[firstname]");
+    By lastnameInput = By.name("user_data[lastname]");
+    By regSubmitBtn = By.name("dispatch[profiles.update]");
 
     @Step("Click Create Account Button")
     public RegistrationPage GotoCreateAccount() throws InterruptedException {
+        Thread.sleep(3000);
         driver.findElement(createAccBTn).click();
         Thread.sleep(3000);
-        driver.findElement(signUpIconIfDisplayed).isDisplayed();
+        driver.findElement(loginForm).isDisplayed();
+        driver.findElement(registrationBtn).click();
         return this;
     }
-    @Step("Fill First Name: {0}")
-    public RegistrationPage FillFirstName(String firstName) {
-        driver.findElement(firstNameInput).sendKeys(firstName);
+    @Step("Fill Email Adress: {0}")
+    public RegistrationPage FillMail(String mail) {
+        driver.findElement(physicalPersonSlc).isSelected();
+        driver.findElement(emailInput).sendKeys(mail);
         return this;
     }
-    @Step("Fill Last Name: {0}")
-    public RegistrationPage FillLastName(String lastName) {
-        driver.findElement(lastNameInput).sendKeys(lastName);
-        return this;
-    }
-    @Step("Fill Last Name: {0}")
-    public RegistrationPage FillMobileNumber(String mobile) {
-        driver.findElement(emaiOrMobilelInput).sendKeys(mobile);
-        return this;
-    }
-    @Step("Fill Last Name: {0}")
-    public RegistrationPage FillPassowrd(String password) {
+    @Step("Fill Password: {0}")
+    public RegistrationPage FillPassword(String password) {
         driver.findElement(passwordInput).sendKeys(password);
         return this;
     }
-    @Step("Fill Last Name: {0}")
-    public RegistrationPage FillBirthMonth(String month) {
-        Select selectDay = new Select(driver.findElement(birthMonthInput));
-        selectDay.selectByVisibleText(month);
+    @Step("Fill Confirm Password: {0}")
+    public RegistrationPage FillConfirmPassowrd(String password) {
+        driver.findElement(confirmPassInput).sendKeys(password);
+        return this;
+    }
+    @Step("Fill First Name: {0}")
+    public RegistrationPage FillFirstname(String firstname) {
+        driver.findElement(firstnameInput).sendKeys(firstname);
         return this;
     }
     @Step("Fill Last Name: {0}")
-    public RegistrationPage FillBirthYear(String year) {
-        Select selectDay = new Select(driver.findElement(birthYearInput));
-        selectDay.selectByVisibleText(year);
+    public RegistrationPage FillLastname(String lastname) {
+        driver.findElement(lastnameInput).sendKeys(lastname);
         return this;
     }
-    @Step("Fill Last Name: {0}")
-    public RegistrationPage FillBirthDay(String day) {
-        Select selectDay = new Select(driver.findElement(birthDayInput));
-        selectDay.selectByVisibleText(day);
-        return this;
-    }
-    @Step("Fill Last Name: {0}")
-    public RegistrationPage SelectGender() {
-        driver.findElement(fameleSelector).click();
-        return this;
-    }
-    @Step("Fill Last Name: {0}")
-    public RegistrationPage SignUpBtnClick() {
-        driver.findElement(getSignUpBtn).click();
+    @Step("Click SubmitBtn: {0}")
+    public RegistrationPage RegSubmitBtn(String txt) throws InterruptedException {
+        driver.findElement(regSubmitBtn).click();
+        Thread.sleep(3000);
+        String color = driver.findElement(UImessage).getText();
+        Assert.assertEquals(color,txt);
         return this;
     }
 }
