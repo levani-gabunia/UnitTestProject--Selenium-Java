@@ -4,7 +4,8 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WindowType;
-import org.testng.Assert;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class RecoveryPage extends CommonPage {
     WebDriver driver;
@@ -26,46 +27,50 @@ public class RecoveryPage extends CommonPage {
 
     @Step("Click Create Account Button")
     public RecoveryPage GotoCreateAccount() throws InterruptedException {
-        Thread.sleep(3000);
-        driver.findElement(createAccBTn).click();
-        Thread.sleep(3000);
-        driver.findElement(loginForm).isDisplayed();
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+
+        wait.until(ExpectedConditions.elementToBeClickable(createAccBTn)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(loginForm)).isDisplayed();
         return this;
     }
     @Step("Click Recovery Button: {0}")
-
     public RecoveryPage GoToRecovery() {
-        driver.findElement(recoveryBtn).click();
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+
+        wait.until(ExpectedConditions.elementToBeClickable(recoveryBtn)).click();
         return this;
     }
     @Step("Fill Mail: {0}")
     public RecoveryPage FillMail(String mail) throws InterruptedException {
-        Thread.sleep(3000);
-        driver.findElement(mailInput).sendKeys(mail);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+
+        wait.until(ExpectedConditions.elementToBeClickable(mailInput)).click();
         return this;
     }
     @Step("Click Submit: {0}")
     public RecoveryPage ClickSubmit() {
-        driver.findElement(recoverySubmitBtn).click();
-        String color = driver.findElement(UImessage).getText();//getCssValue("border-color");
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+
+        wait.until(ExpectedConditions.elementToBeClickable(recoverySubmitBtn)).click();
+/*        String color = driver.findElement(UImessage).getText();//getCssValue("border-color");
         Assert.assertEquals(color, "×\n" +
-                "ინფორმაცია პაროლის აღდგენის ინსტრუქცია გაგზავნილია თქვენს ელ-პოსტაზე.");
+                "ინფორმაცია პაროლის აღდგენის ინსტრუქცია გაგზავნილია თქვენს ელ-პოსტაზე.");*/
         return this;
     }
     @Step("Yahoo Login - change Password: {0}")
     public RecoveryPage yahooLogin(String mail, String pass,String city, String adress) throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+
         driver.switchTo().newWindow(WindowType.TAB);
         driver.navigate().to("https://login.yahoo.com/?.lang=en-US&src=homepage&.done=https%3A%2F%2Fwww.yahoo.com%2F&pspid=2023538075&activity=ybar-signin");
-        driver.findElement(yahooMailInput).sendKeys(mail);
-        driver.findElement(yahooMailSubmitBtn).click();
-        Thread.sleep(2000);
-        driver.findElement(yahooPassInput).sendKeys(pass);
-        driver.findElement(yahooMailSubmitBtn).click();
-        driver.findElement(yahooMailBoxBtb).click();
-        driver.findElement(firstMail).click();
-        Thread.sleep(2000);
-/*        driver.findElement(recoveryLink).click();
-        driver.findElement(userDataPassInput).sendKeys(pass);
+        wait.until(ExpectedConditions.elementToBeClickable(yahooMailInput)).sendKeys(mail);
+        wait.until(ExpectedConditions.elementToBeClickable(yahooMailSubmitBtn)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(yahooPassInput)).sendKeys(pass);
+        wait.until(ExpectedConditions.elementToBeClickable(yahooMailSubmitBtn)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(yahooMailBoxBtb)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(firstMail)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(recoveryLink)).click();
+/*        driver.findElement(userDataPassInput).sendKeys(pass);
         driver.findElement(userDataPass2Input).sendKeys(pass);
         driver.findElement(userDataCityInput).sendKeys(city);
         driver.findElement(userDataCityInput).sendKeys(adress);

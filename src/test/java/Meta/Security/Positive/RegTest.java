@@ -1,15 +1,18 @@
 package Meta.Security.Positive;
+
 import Utils.Retry;
 import Utils.Starter;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import Utils.TestAllureListener;
 import io.qameta.allure.Description;
 import io.qameta.allure.Link;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import Pages.RegistrationPage;
 import static DataObject.RegisterData.*;
 
+@Listeners({TestAllureListener.class})
 public class RegTest extends Starter {
     @Test(retryAnalyzer = Retry.class)
     @Severity(SeverityLevel.CRITICAL)

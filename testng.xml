@@ -1,6 +1,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="Automation Suite" verbose="1" thread-count="8" parallel="tests">        <!-- პარალელურად გასაშვებად parallel="tests" უნდა დაემატოს აქაც და test-შიც-->
+<suite name="Automation Suite" verbose="1" thread-count="8" parallel="tests">
+    <!-- პარალელურად გასაშვებად parallel="tests" უნდა დაემატოს აქაც და test-შიც-->
+    <listeners>
+        <listener class-name="Utils.TestAllureListener" /> <!--//screenshoter-->
+    </listeners>
     <test name="TestSuit1" parallel="tests">
         <classes>
             <class name="Meta.Security.Positive.RegTest" />
@@ -8,11 +12,11 @@
             <class name="Meta.Security.Positive.LoginTest" />
         </classes>
     </test>
-<!--        <test name="TestSuit2" parallel="tests">
+        <test name="TestSuit2" parallel="tests">
             <classes>
                 <class name="Meta.Security.Negative.RegTest" />
-                <class name="Meta.Security.Negative.RecoveryTest" />
                 <class name="Meta.Security.Negative.LoginTest" />
+                <class name="Meta.Security.Negative.RecoveryTest" />
             </classes>
-        </test>-->
+        </test>
 </suite>

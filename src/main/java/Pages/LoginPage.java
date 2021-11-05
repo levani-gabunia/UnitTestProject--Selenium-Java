@@ -3,7 +3,7 @@ package Pages;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WindowType;
+import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
 public class LoginPage extends CommonPage {
@@ -16,6 +16,15 @@ public class LoginPage extends CommonPage {
     By emailInput = By.xpath("//*[@id=\"login_popup342\"]");
     By passwordInput = By.xpath("//*[@id=\"psw_popup342\"]");
     By loginSubmitBtn = By.name("dispatch[auth.login]");
+/*          same:
+        @FindBy(xpath = "//*[@id=\'login_popup342\"]")
+    By emailInput;
+
+    @FindBy(xpath = "//*[@id=\"psw_popup342\"]")
+    By passwordInput;
+
+    @FindBy(name = "dispatch[auth.login]")
+    By loginSubmitBtn;*/
 
     @Step("Click Login Account Button")
     public LoginPage GotoSignIn() throws InterruptedException {

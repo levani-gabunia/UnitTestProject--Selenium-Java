@@ -3,14 +3,16 @@ package Meta.Security.Negative;
 import Pages.RecoveryPage;
 import Utils.Retry;
 import Utils.Starter;
+import Utils.TestAllureListener;
 import io.qameta.allure.Description;
 import io.qameta.allure.Link;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
 import static DataObject.RegisterData.email;
 
+@Listeners({TestAllureListener.class})
 public class RecoveryTest extends Starter {
     @Test(retryAnalyzer = Retry.class)
     @Severity(SeverityLevel.CRITICAL)
