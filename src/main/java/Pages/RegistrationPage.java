@@ -2,13 +2,17 @@ package Pages;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 public class RegistrationPage extends CommonPage {
     WebDriver driver;
+    WebDriverWait wait;
 
     public RegistrationPage(WebDriver driver) {
         this.driver = driver;
+        wait = new WebDriverWait(driver, 10);
     }
 
     By registrationBtn = By.className("ty-login-reglink__a");
@@ -22,44 +26,42 @@ public class RegistrationPage extends CommonPage {
 
     @Step("Click Create Account Button")
     public RegistrationPage GotoCreateAccount() throws InterruptedException {
-        Thread.sleep(3000);
-        driver.findElement(createAccBTn).click();
-        Thread.sleep(3000);
-        driver.findElement(loginForm).isDisplayed();
-        driver.findElement(registrationBtn).click();
+        wait.until(ExpectedConditions.elementToBeClickable(createAccBTn)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(registrationBtn)).click();
         return this;
     }
     @Step("Fill Email Adress: {0}")
     public RegistrationPage FillMail(String mail) {
-        driver.findElement(physicalPersonSlc).isSelected();
-        driver.findElement(emailInput).sendKeys(mail);
+        wait.until(ExpectedConditions.elementToBeClickable(physicalPersonSlc)).isSelected();
+        wait.until(ExpectedConditions.elementToBeClickable(emailInput)).sendKeys(mail);
         return this;
     }
     @Step("Fill Password: {0}")
     public RegistrationPage FillPassword(String password) {
-        driver.findElement(passwordInput).sendKeys(password);
+        wait.until(ExpectedConditions.elementToBeClickable(passwordInput)).sendKeys(password);
         return this;
     }
     @Step("Fill Confirm Password: {0}")
     public RegistrationPage FillConfirmPassowrd(String password) {
-        driver.findElement(confirmPassInput).sendKeys(password);
+        wait.until(ExpectedConditions.elementToBeClickable(confirmPassInput)).sendKeys(password);
+
         return this;
     }
     @Step("Fill First Name: {0}")
     public RegistrationPage FillFirstname(String firstname) {
-        driver.findElement(firstnameInput).sendKeys(firstname);
+        wait.until(ExpectedConditions.elementToBeClickable(firstnameInput)).sendKeys(firstname);
+
         return this;
     }
     @Step("Fill Last Name: {0}")
     public RegistrationPage FillLastname(String lastname) {
-        driver.findElement(lastnameInput).sendKeys(lastname);
+        wait.until(ExpectedConditions.elementToBeClickable(lastnameInput)).sendKeys(lastname);
         return this;
     }
     @Step("Click SubmitBtn: {0}")
     public RegistrationPage RegSubmitBtn(String txt) throws InterruptedException {
-        driver.findElement(regSubmitBtn).click();
-        Thread.sleep(3000);
-        String color = driver.findElement(UImessage).getText();
+        wait.until(ExpectedConditions.elementToBeClickable(regSubmitBtn)).click();
+        String color = wait.until(ExpectedConditions.elementToBeClickable(UImessage)).getText();
         Assert.assertEquals(color,txt);
         return this;
     }

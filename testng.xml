@@ -8,15 +8,15 @@
     <test name="TestSuit1" parallel="tests">
         <classes>
             <class name="Meta.Security.Positive.RegTest" />
-            <class name="Meta.Security.Positive.RecoveryTest" />
             <class name="Meta.Security.Positive.LoginTest" />
+            <class name="Meta.Security.Positive.RecoveryTest" />
         </classes>
     </test>
         <test name="TestSuit2" parallel="tests">
             <classes>
-                <class name="Meta.Security.Negative.RegTest" />
                 <class name="Meta.Security.Negative.LoginTest" />
                 <class name="Meta.Security.Negative.RecoveryTest" />
+                <class name="Meta.Security.Negative.RegTest" />
             </classes>
         </test>
 </suite>

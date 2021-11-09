@@ -1,14 +1,12 @@
 package Pages;
 
-import io.qameta.allure.Step;
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.*;
-
-import java.io.File;
-import java.io.IOException;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CommonPage {
     WebDriver driver;
+    WebDriverWait wait;
 
     By createAccBTn = By.className("ty-account-info__title-txt");
     By userDataPassInput = By.xpath("/html/body/div[1]/div[4]/div[4]/div/div/div[2]/div/div/div/form/div[2]/input");
